@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Remote: ruby-2.1.2p95 ( revision 45877)-p95" project-jdk-type="RUBY_SDK" />
+  <component name="RemoteMappingsManager">
+    <list>
+      <list>
+        <remote-mappings server-id="ruby@ssh://eunbae_ko@analytics-dev:22/home/eunbae_ko/.rbenv/versions/2.1.2/bin/ruby">
+          <settings>
+            <list>
+              <mapping local-root="$PROJECT_DIR$/../analytics-www" remote-root="/home/eunbae_ko/analytics" />
+            </list>
+          </settings>
+        </remote-mappings>
+      </list>
+    </list>
+  </component>
+</project>
