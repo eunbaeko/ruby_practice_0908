@@ -1,24 +1,29 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+二つの実行ファイルがあります。rails上で動くコマンドプログラムです。
 
-Things you may want to cover:
+`bundle install`
 
-* Ruby version
+のあと、
 
-* System dependencies
+`bundle exec rails r etc/create_index.rb`
 
-* Configuration
+を実行するとIndexファイルを生成します。
 
-* Database creation
+ファイルのパス、エンコードを指定する場合は、
 
-* Database initialization
+`bundle exec rails r etc/create_index.rb --path etc/resource/KEN_ALL.CSV --encoding Shift_JIS`
 
-* How to run the test suite
+のようにArgumentを設定してください。
 
-* Services (job queues, cache servers, search engines, etc.)
+指定しなかった場合、上の例に書いているパラメータがDefaultとして適用されます。
 
-* Deployment instructions
+実行前に、元になるファイルをパスに配置してください。
 
-* ...
+`bundle exec rails r etc/search.rb`
+
+を実行すると検索コンソールへ進みます。
+
+日本語を入力すると検索結果が出力されます。
+
+`\q` を入力すると終了されます。
