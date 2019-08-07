@@ -1,19 +1,9 @@
 require 'optparse'
 require 'fileutils'
-require 'objspace'
+require_relative 'base'
 
-class CreateIndex
+class CreateIndex < Base
   class << self
-    INDEX_PATH = 'etc/index'
-
-    def post_file
-      "#{INDEX_PATH}/post.tsv"
-    end
-
-    def search_file(letter)
-      return nil unless letter.present? && letter.is_a?(String)
-      "#{INDEX_PATH}/#{letter.ord}.tsv"
-    end
 
     def create_dictionary(resource_path, encoding)
 
@@ -106,13 +96,16 @@ end
 
 t = Time.now
 
+# get paramters
 opts = ARGV.getopts('', 'path:', 'encoding:')
 path = opts['path']
 encoding = opts['encoding']
 
+# default setting
 path = 'etc/resource/KEN_ALL.CSV' if path.blank?
 encoding = 'Shift_JIS' if encoding.blank?
 
+# ファイルから必要なデータを抽出し、郵便番号をキーとするHashを作る
 dic = CreateIndex.create_dictionary(path, encoding)
 
 unless dic.present?
@@ -122,6 +115,7 @@ end
 
 puts "dic created : #{Time.now - t}sec"
 
+# 出力用の住所ファイル
 unless CreateIndex.write_post_index(dic)
   puts 'cancel'
   exit
@@ -129,13 +123,12 @@ end
 
 puts "wrote post index : #{Time.now - t}sec"
 
+# 検索用Index Hashを作る
 index_hash = CreateIndex.create_index_hash(dic)
 
 puts "index hash created : #{Time.now - t}sec"
 
-puts "#{ObjectSpace.memsize_of_all * 0.001 * 0.001} MB"
-puts "#{ObjectSpace.memsize_of_all * 0.001} KB"
-
+# Index Hashの内容をファイルに書く
 CreateIndex.write_search_index(index_hash)
 
 puts "wrote index files : #{Time.now - t}sec"
